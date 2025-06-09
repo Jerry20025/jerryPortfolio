@@ -17,7 +17,8 @@ import portfolio from '../assets/portfolio.png';
 const Projects = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0,
+    rootMargin: '-50px 0px',
   });
 
   const handleLiveClick = (liveUrl: string, projectName: string) => {
@@ -200,6 +201,7 @@ const Projects = () => {
     visible: {
       opacity: 1,
       transition: {
+        when: "beforeChildren",
         staggerChildren: 0.2,
       },
     },
@@ -210,6 +212,9 @@ const Projects = () => {
     visible: {
       y: 0,
       opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
     },
   };
 
@@ -238,9 +243,9 @@ const Projects = () => {
       <div className="w-full max-w-6xl mx-auto px-2 sm:px-4">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          variants={containerVariants}
           className="mb-10 sm:mb-16"
         >
           <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-center text-white flex items-center justify-center">
