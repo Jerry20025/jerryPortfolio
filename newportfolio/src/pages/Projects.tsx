@@ -12,6 +12,7 @@ import eventManagement from '../assets/Event Management.jpeg';
 import walletAdapter from '../assets/wallet Adapter.jpeg';
 import decentralized from '../assets/Decentralized.png';
 import blog from '../assets/blog.png';
+import portfolio from '../assets/portfolio.png';
 
 const Projects = () => {
   const [ref, inView] = useInView({
@@ -28,6 +29,26 @@ const Projects = () => {
   };
 
   const projects = [
+    {
+      title: 'Personal Portfolio Website',
+      description: 'A modern, responsive portfolio website showcasing my projects and skills, built with React and TypeScript.',
+      image: portfolio,
+      period: 'Mar 2024',
+      technologies: [
+        { name: 'React.js', icon: <SiReact className="text-blue-400" /> },
+        { name: 'TypeScript', icon: <SiTypescript className="text-blue-600" /> },
+        { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-cyan-400" /> },
+        { name: 'Framer Motion', icon: <SiReact className="text-blue-400" /> },
+      ],
+      github: 'https://github.com/Jerry20025/newportfolio',
+      live: '',
+      features: [
+        'Responsive design with modern UI/UX principles',
+        'Smooth animations using Framer Motion',
+        'Interactive project showcase with detailed information',
+        'Dark mode with gradient backgrounds',
+      ],
+    },
     {
       title: 'Decentralized File Storage with NFT Access Control',
       description: 'A secure decentralized file storage system with NFT-based access control and Solana blockchain integration.',
