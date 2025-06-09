@@ -41,8 +41,8 @@ const Projects = () => {
         { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-cyan-400" /> },
         { name: 'Framer Motion', icon: <SiReact className="text-blue-400" /> },
       ],
-      github: 'https://github.com/Jerry20025/newportfolio',
-      live: '',
+      github: 'https://github.com/Jerry20025/jerryPortfolio',
+      live: 'https://jerry-portfolio-psi.vercel.app/',
       features: [
         'Responsive design with modern UI/UX principles',
         'Smooth animations using Framer Motion',
@@ -275,18 +275,20 @@ const Projects = () => {
                     alt={project.title}
                     className="w-full h-48 sm:h-64 object-contain rounded-lg"
                   />
-                  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center space-x-6">
+                  <div className="absolute inset-0 bg-black/50 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center space-x-6">
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-black hover:text-gray-700 transition-colors bg-white/90 p-2 rounded-full"
+                      className="text-white hover:text-gray-300 transition-colors bg-gray-800/80 p-3 rounded-full"
+                      aria-label="GitHub Repository"
                     >
                       <FaGithub size={24} />
                     </a>
                     <button
                       onClick={() => handleLiveClick(project.live, project.title)}
-                      className="text-black hover:text-gray-700 transition-colors bg-white/90 p-2 rounded-full"
+                      className="text-white hover:text-gray-300 transition-colors bg-gray-800/80 p-3 rounded-full"
+                      aria-label="Live Demo"
                     >
                       <FaExternalLinkAlt size={24} />
                     </button>
