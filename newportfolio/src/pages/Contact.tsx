@@ -49,7 +49,7 @@ const Contact = () => {
   const socialLinks = [
     { icon: <FaGithub size={24} />, url: "https://github.com/Jerry20025", label: "GitHub" },
     { icon: <FaLinkedin size={24} />, url: "https://www.linkedin.com/in/anil-kumar-46a720234/", label: "LinkedIn" },
-    { icon: <FaTwitter size={24} />, url: "https://x.com/iamdevil2002", label: "Twitter" },
+    { icon: <FaTwitter size={24} />, url: "https://x.com/anil_kumar_2002", label: "Twitter" },
   ];
 
   return (
