@@ -26,7 +26,7 @@ const Navbar = () => {
         <div className="mb-10">
           <Link to="/" className="text-3xl font-extrabold text-cyan-400">A</Link>
           <div className="text-base font-semibold text-white mt-2">Anil Kumar</div>
-          <div className="text-xs text-gray-400">Software Developer</div>
+          <div className="text-xs text-gray-400">Developer</div>
         </div>
         {/* Navigation */}
         <nav className="flex-1 w-full">
