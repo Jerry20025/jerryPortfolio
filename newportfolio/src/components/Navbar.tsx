@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaBars, FaTimes, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaBars, FaTimes, FaGithub, FaLinkedin, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 const navItems = [
   { name: 'Home', path: '/' },
@@ -12,7 +12,8 @@ const navItems = [
 const socialLinks = [
   { icon: <FaGithub size={18} />, href: 'https://github.com/Jerry20025' },
   { icon: <FaLinkedin size={18} />, href: 'https://www.linkedin.com/in/anil-kumar-46a720234/' },
-  { icon: <FaTwitter size={18} />, href: 'https://x.com/iamdevil2002' },
+  { icon: <FaTwitter size={18} />, href: 'https://x.com/anil_kumar_2002' },
+  { icon: <FaInstagram size={18} />, href: 'https://www.instagram.com/anil.kumar.0502/' },
 ];
 
 const Navbar = () => {

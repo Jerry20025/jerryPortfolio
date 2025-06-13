@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaEnvelope, FaMapMarkerAlt, FaGithub, FaLinkedin, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -50,6 +50,7 @@ const Contact = () => {
     { icon: <FaGithub size={24} />, url: "https://github.com/Jerry20025", label: "GitHub" },
     { icon: <FaLinkedin size={24} />, url: "https://www.linkedin.com/in/anil-kumar-46a720234/", label: "LinkedIn" },
     { icon: <FaTwitter size={24} />, url: "https://x.com/anil_kumar_2002", label: "Twitter" },
+    { icon: <FaInstagram size={24} />, url: "https://www.instagram.com/anil.kumar.0502/", label: "Instagram" },
   ];
 
   return (
@@ -164,15 +165,6 @@ const Contact = () => {
                   <div>
                     <h4 className="text-lg font-semibold text-white mb-1">Email</h4>
                     <p className="text-gray-300">ak2498315@gmail.com</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 bg-green-500/10 rounded-lg">
-                    <FaPhone className="text-green-400" size={24} />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-1">Phone</h4>
-                    <p className="text-gray-300">+91 9911287880</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
