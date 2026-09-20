@@ -1,154 +1,110 @@
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTwitter, FaArrowRight, FaReact, FaPython } from 'react-icons/fa';
+import { SiTypescript, SiMongodb } from 'react-icons/si';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const name = "Anil Kumar";
-  const nameArray = name.split("");
+  
+  // Floating animation variants
+  const floatVariants = (delay: number, duration: number, yOffset: number) => ({
+    initial: { y: 0, opacity: 0, scale: 0.8 },
+    animate: { 
+      y: [0, yOffset, 0], 
+      opacity: 1, 
+      scale: 1,
+      transition: { 
+        y: { duration, repeat: Infinity, ease: "easeInOut", delay },
+        opacity: { duration: 1, delay: 0.5 },
+        scale: { duration: 1, delay: 0.5, type: "spring" }
+      } 
+    }
+  });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      <div className="container mx-auto px-4 py-16">
-        {/* Hero Section */}
-        <div className="flex flex-col items-center text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-5xl md:text-7xl font-extrabold mb-6">
-              <motion.span 
-                className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                Hi, I'm
-              </motion.span>{' '}
-              <span className="text-white inline-block">
-                {nameArray.map((letter, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 0.1,
-                      delay: 0.5 + index * 0.1,
-                    }}
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </span>
-            </h1>
-            <motion.p 
-              className="text-2xl md:text-3xl text-gray-300 mb-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.5 }}
-            >
-              Software Development Engineer & AI Enthusiast
-            </motion.p>
-            <motion.p 
-              className="text-gray-300 text-lg max-w-2xl mx-auto mb-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.7 }}
-            >
-              Building scalable AI systems at Samsung India using LangChain, LangGraph, and MCP servers. Passionate about Generative AI, Deep Learning, and creating intelligent solutions.
-            </motion.p>
-          </motion.div>
+    <div className="flex flex-col items-center justify-center h-[calc(100vh-144px)] overflow-hidden text-center max-w-6xl mx-auto relative px-4">
+      
+      {/* Floating Orbital Elements */}
+      <motion.div variants={floatVariants(0, 6, -20)} initial="initial" animate="animate" className="absolute top-1/4 left-10 md:left-20 hidden md:flex items-center justify-center w-16 h-16 bg-neutral-900 rounded-2xl shadow-xl border border-neutral-800 text-white">
+        <FaReact size={32} />
+      </motion.div>
+      <motion.div variants={floatVariants(1.5, 7, 25)} initial="initial" animate="animate" className="absolute top-1/3 right-10 md:right-20 hidden md:flex items-center justify-center w-16 h-16 bg-neutral-900 rounded-2xl shadow-xl border border-neutral-800 text-white">
+        <FaPython size={32} />
+      </motion.div>
+      <motion.div variants={floatVariants(2.5, 5, -15)} initial="initial" animate="animate" className="absolute bottom-1/4 left-20 md:left-32 hidden md:flex items-center justify-center w-14 h-14 bg-neutral-900 rounded-2xl shadow-xl border border-neutral-800 text-white">
+        <SiTypescript size={28} />
+      </motion.div>
+      <motion.div variants={floatVariants(1, 8, 20)} initial="initial" animate="animate" className="absolute bottom-1/3 right-20 md:right-32 hidden md:flex items-center justify-center w-14 h-14 bg-neutral-900 rounded-2xl shadow-xl border border-neutral-800 text-white">
+        <SiMongodb size={28} />
+      </motion.div>
 
-          {/* Social Links */}
-          <motion.div 
-            className="flex justify-center space-x-8 mb-16"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 1.9 }}
-          >
-            <motion.a 
-              href="https://github.com/Jerry20025" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-gray-400 hover:text-white transition-colors"
-              whileHover={{ scale: 1.05 }}
-            >
-              <FaGithub size={32} />
-            </motion.a>
-            <motion.a 
-              href="https://www.linkedin.com/in/anil-kumar-46a720234/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-gray-400 hover:text-white transition-colors"
-              whileHover={{ scale: 1.05 }}
-            >
-              <FaLinkedin size={32} />
-            </motion.a>
-            <motion.a 
-              href="https://x.com/anil_kumar_2002" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-gray-400 hover:text-white transition-colors"
-              whileHover={{ scale: 1.05 }}
-            >
-              <FaTwitter size={32} />
-            </motion.a>
-          </motion.div>
+      <div className="flex flex-col items-center justify-center z-10 px-4 mt-8 md:mt-0">
+        
+        <motion.h1 
+          className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black mb-4 tracking-tighter text-white"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <span className="block">{name}</span>
+          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-500">
+            AI Engineer
+          </span>
+        </motion.h1>
 
-          {/* Skills Preview */}
-          <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 2.1 }}
-          >
-            <motion.div 
-              className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm hover:bg-gray-800/70 transition-colors"
-              whileHover={{ y: -3 }}
-              transition={{ duration: 0.2 }}
-            >
-              <h3 className="text-white font-semibold mb-2">Full Stack</h3>
-              <p className="text-gray-400">React, Next.js, Node.js, Express, TypeScript</p>
-            </motion.div>
-            <motion.div 
-              className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm hover:bg-gray-800/70 transition-colors"
-              whileHover={{ y: -3 }}
-              transition={{ duration: 0.2 }}
-            >
-              <h3 className="text-white font-semibold mb-2">AI/ML</h3>
-              <p className="text-gray-400">LangChain, LangGraph, Deep Learning, LLMs</p>
-            </motion.div>
-            <motion.div 
-              className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm hover:bg-gray-800/70 transition-colors"
-              whileHover={{ y: -3 }}
-              transition={{ duration: 0.2 }}
-            >
-              <h3 className="text-white font-semibold mb-2">Databases</h3>
-              <p className="text-gray-400">MongoDB, PostgreSQL, FAISS, Chroma</p>
-            </motion.div>
-            <motion.div 
-              className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm hover:bg-gray-800/70 transition-colors"
-              whileHover={{ y: -3 }}
-              transition={{ duration: 0.2 }}
-            >
-              <h3 className="text-white font-semibold mb-2">Languages</h3>
-              <p className="text-gray-400">Python, C/C++, JavaScript, TypeScript, SQL</p>
-            </motion.div>
-          </motion.div>
-
-          {/* Additional Info */}
-          <motion.div 
-            className="mt-16 text-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 2.3 }}
-          >
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Passionate about solving complex problems through scalable AI systems and intelligent applications. 
-              Currently building agentic workflows and exploring cutting-edge Generative AI technologies.
-            </p>
-          </motion.div>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="inline-block mt-4 mb-8 bg-neutral-900 border border-neutral-800 px-8 py-3 rounded-full shadow-lg"
+        >
+          <p className="text-lg md:text-xl font-bold text-white tracking-widest uppercase">
+            SDE & AI <span className="text-neutral-500">Architect</span>
+          </p>
+        </motion.div>
       </div>
+
+      {/* Description */}
+      <motion.p 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+        className="text-base md:text-xl text-neutral-400 max-w-3xl mb-8 leading-relaxed font-medium z-10"
+      >
+        I build scalable AI systems and full-stack applications. Currently an SDE at Samsung Research Institute, where I focus on bringing complex agentic workflows and intelligent tools into production.
+      </motion.p>
+
+      {/* Action Area */}
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8 }}
+        className="flex flex-col sm:flex-row items-center justify-center gap-6 z-10"
+      >
+        <Link to="/projects">
+          <motion.button 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="group relative px-8 py-4 rounded-full bg-white text-black font-bold text-lg flex items-center shadow-2xl transition-all"
+          >
+            Explore My Work <FaArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" />
+          </motion.button>
+        </Link>
+
+        {/* Social Links Dock */}
+        <div className="flex items-center gap-6 px-8 py-4 bg-neutral-900 border border-neutral-800 shadow-xl rounded-full">
+          <a href="https://github.com/Jerry20025" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white hover:scale-110 transition-all">
+            <FaGithub size={24} />
+          </a>
+          <a href="https://www.linkedin.com/in/anil-kumar-46a720234/" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white hover:scale-110 transition-all">
+            <FaLinkedin size={24} />
+          </a>
+          <a href="https://x.com/anil_kumar_2002" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white hover:scale-110 transition-all">
+            <FaTwitter size={24} />
+          </a>
+        </div>
+      </motion.div>
+
     </div>
   );
 };

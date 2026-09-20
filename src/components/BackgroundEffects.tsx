@@ -1,144 +1,103 @@
-import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Icosahedron, TorusKnot, Sparkles, Trail } from '@react-three/drei';
+import { useRef } from 'react';
+import * as THREE from 'three';
 
-const BackgroundEffects = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+// Highly aggressive, complex AI Core
+const AICore = () => {
+  const coreRef = useRef<THREE.Group>(null);
+  const ring1Ref = useRef<THREE.Mesh>(null);
+  const ring2Ref = useRef<THREE.Mesh>(null);
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  useFrame((state) => {
+    const time = state.clock.elapsedTime;
+    const scrollY = window.scrollY;
+    
+    if (coreRef.current) {
+      // Continuous base rotation
+      const baseRotY = time * 0.2 + (scrollY * 0.001);
+      const baseRotX = time * 0.15;
+      
+      // Target offset based on mouse position
+      const mouseOffsetY = (state.pointer.x * Math.PI) / 3;
+      const mouseOffsetX = -(state.pointer.y * Math.PI) / 3;
+      
+      // Smoothly interpolate to the combined rotation
+      coreRef.current.rotation.y = THREE.MathUtils.lerp(coreRef.current.rotation.y, baseRotY + mouseOffsetY, 0.05);
+      coreRef.current.rotation.x = THREE.MathUtils.lerp(coreRef.current.rotation.x, baseRotX + mouseOffsetX, 0.05);
 
-    const particles: Array<{
-      x: number;
-      y: number;
-      radius: number;
-      vx: number;
-      vy: number;
-      opacity: number;
-    }> = [];
-
-    const particleCount = 50;
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 2 + 1,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        opacity: Math.random() * 0.5 + 0.2,
-      });
+      coreRef.current.position.y = THREE.MathUtils.lerp(coreRef.current.position.y, (scrollY * 0.005), 0.1);
     }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach((particle) => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(59, 130, 246, ${particle.opacity})`;
-        ctx.fill();
-      });
-
-      // Draw connections
-      particles.forEach((particle, i) => {
-        particles.slice(i + 1).forEach((otherParticle) => {
-          const dx = particle.x - otherParticle.x;
-          const dy = particle.y - otherParticle.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 150) {
-            ctx.beginPath();
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(59, 130, 246, ${0.1 * (1 - distance / 150)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        });
-      });
-
-      requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    
+    if (ring1Ref.current && ring2Ref.current) {
+      ring1Ref.current.rotation.z = time * 0.8;
+      ring2Ref.current.rotation.y = -time * 1.2;
+      ring2Ref.current.rotation.x = time * 0.5;
+    }
+  });
 
   return (
-    <>
-      <canvas
-        ref={canvasRef}
-        className="fixed inset-0 pointer-events-none z-[1]"
-        style={{ background: 'transparent' }}
-      />
-      {/* Animated gradient orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[1]">
-        <motion.div
-          className="absolute w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"
-          animate={{
-            x: [0, 100, 0],
-            y: [0, 50, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          style={{ top: '10%', left: '10%' }}
-        />
-        <motion.div
-          className="absolute w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
-          animate={{
-            x: [0, -100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.3, 1],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          style={{ bottom: '10%', right: '10%' }}
-        />
-        <motion.div
-          className="absolute w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl"
-          animate={{
-            x: [0, 50, 0],
-            y: [0, -100, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          style={{ top: '50%', right: '20%' }}
-        />
+    <group ref={coreRef} position={[0, 0, -3]} scale={1.5}>
+      {/* Central Neural Node */}
+      <Icosahedron args={[1, 2]}>
+        <meshStandardMaterial color="#ffffff" wireframe={true} wireframeLinewidth={2} transparent opacity={0.15} />
+      </Icosahedron>
+
+      {/* Inner Data Core */}
+      <Icosahedron args={[0.7, 1]}>
+        <meshStandardMaterial color="#222222" roughness={0.4} metalness={0.9} emissive="#050505" />
+      </Icosahedron>
+
+      {/* Complex Quantum Ring 1 */}
+      <TorusKnot ref={ring1Ref} args={[1.5, 0.02, 256, 16, 3, 7]}>
+        <meshStandardMaterial color="#ffffff" wireframe={true} transparent opacity={0.1} />
+      </TorusKnot>
+
+      {/* Complex Quantum Ring 2 - Silver Glow */}
+      <TorusKnot ref={ring2Ref} args={[2, 0.05, 128, 8, 2, 5]}>
+        <meshStandardMaterial color="#ffffff" roughness={0.1} metalness={0.9} emissive="#ffffff" emissiveIntensity={0.1} transparent opacity={0.5} />
+      </TorusKnot>
+
+      {/* Data Swarm (Particles) */}
+      <Sparkles count={300} scale={8} size={2} speed={0.5} opacity={0.4} color="#ffffff" />
+      
+    </group>
+  );
+};
+
+const BackgroundEffects = () => {
+  return (
+    <div className="fixed inset-0 z-[-1] overflow-hidden bg-black">
+      
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-[#0a0a0a]"></div>
+
+      {/* 3D Canvas Layer */}
+      <div className="absolute inset-0">
+        <Canvas camera={{ position: [0, 0, 8], fov: 45 }} eventSource={document.body}>
+          <ambientLight intensity={0.2} />
+          <directionalLight position={[10, 10, 10]} intensity={1} color="#ffffff" />
+          <directionalLight position={[-10, -10, -10]} intensity={0.5} color="#ffffff" />
+          
+          <AICore />
+        </Canvas>
       </div>
-    </>
+
+      {/* Tech Grid Overlay for absolute AI aesthetic */}
+      <div 
+        className="absolute inset-0 opacity-[0.02]"
+        style={{ 
+          backgroundImage: `
+            linear-gradient(to right, #ffffff 1px, transparent 1px),
+            linear-gradient(to bottom, #ffffff 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px'
+        }}
+      ></div>
+      
+    </div>
   );
 };
 
 export default BackgroundEffects;
-
