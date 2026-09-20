@@ -41,7 +41,7 @@ const Home = () => {
       <div className="flex flex-col items-center justify-center z-10 px-4 mt-8 md:mt-0">
         
         <motion.h1 
-          className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black mb-4 tracking-tighter text-white"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black mb-4 tracking-tighter text-white"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
