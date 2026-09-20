@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Icosahedron, TorusKnot, Sparkles, Trail } from '@react-three/drei';
+import { Icosahedron, TorusKnot, Sparkles } from '@react-three/drei';
 import { useRef } from 'react';
 import * as THREE from 'three';
 

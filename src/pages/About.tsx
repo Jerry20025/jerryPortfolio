@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaGraduationCap, FaBriefcase, FaCode, FaReact, FaPython } from 'react-icons/fa';
-import { SiNextdotjs, SiTypescript, SiMongodb, SiPostgresql } from 'react-icons/si';
+import { FaGraduationCap, FaBriefcase, FaCode } from 'react-icons/fa';
 
 const About = () => {
   const containerVariants = {

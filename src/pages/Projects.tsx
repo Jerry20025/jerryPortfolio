@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { FaCode, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import { SiReact, SiTypescript, SiTailwindcss, SiNodedotjs, SiMongodb, SiPrisma, SiPostgresql, SiCloudflare, SiChakraui, SiIpfs, SiSolana, SiJavascript, SiHtml5 } from 'react-icons/si';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { SiReact, SiTypescript, SiTailwindcss, SiNodedotjs, SiMongodb, SiPrisma, SiPostgresql, SiChakraui, SiIpfs, SiSolana, SiJavascript, SiHtml5 } from 'react-icons/si';
 
 import paymentApp from '../assets/Dummy Payment App.png';
 import cryptoDashboard from '../assets/Crypto Dashboard.jpeg';
@@ -14,7 +13,6 @@ import portfolio from '../assets/portfolio.png';
 import taskflow from '../assets/taskflow.png';
 
 const Projects = () => {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
 
   const projects = [
     {
